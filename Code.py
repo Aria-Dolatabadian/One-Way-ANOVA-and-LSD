@@ -3,15 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import f_oneway, t, sem
 
-# Create a DataFrame with the given data
-data = {
-    'Control': [10, 12, 11, 10, 12],
-    '50 ppm': [25, 24, 23, 25, 22],
-    '100 ppm': [24, 25, 25, 23, 25],
-    '200 ppm': [31, 32, 30, 32, 31],
-    '400 ppm': [2, 1, 0, 2, 1]
-}
-
+#read data
+data = pd.read_csv("data.csv")
 df = pd.DataFrame(data)
 
 # Perform one-way ANOVA
@@ -59,7 +52,7 @@ plt.show()
 print("Standard Deviations:")
 print(stds)
 
-# Export the output as a CSV file
+# Export the ANOVA and LSD results as a CSV file
 output_data = {
     'Comparison': [f"{comp[0]} vs {comp[1]}" for comp in comparisons],
     'Difference': [comp[2] for comp in comparisons],
@@ -70,7 +63,7 @@ output_data = {
 output_df = pd.DataFrame(output_data)
 output_df.to_csv('ANOVA_LSD_Results.csv', index=False)
 
-# Export standard deviations as a separate CSV file
+# Export the standard deviations as a separate CSV file
 stds_df = pd.DataFrame(stds, columns=['Standard Deviations'])
-stds_df.to_csv('StD.csv')
+stds_df.to_csv('StD.csv', index=True)
 
