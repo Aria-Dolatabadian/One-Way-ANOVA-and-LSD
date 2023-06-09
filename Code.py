@@ -52,6 +52,10 @@ plt.show()
 print("Standard Deviations:")
 print(stds)
 
+# Calculate coefficient of variation (CV)
+cv = (stds / means) * 100
+print ("Coefficient of variation:\n",cv)
+
 # Export the ANOVA and LSD results as a CSV file
 output_data = {
     'Comparison': [f"{comp[0]} vs {comp[1]}" for comp in comparisons],
@@ -66,4 +70,7 @@ output_df.to_csv('ANOVA_LSD_Results.csv', index=False)
 # Export the standard deviations as a separate CSV file
 stds_df = pd.DataFrame(stds, columns=['Standard Deviations'])
 stds_df.to_csv('StD.csv', index=True)
+# Export coefficient of variation (CV) as a separate CSV file
 
+cv_df = pd.DataFrame(cv, columns=['Coefficient of variation'])
+cv_df.to_csv('CV.csv', index=True)
